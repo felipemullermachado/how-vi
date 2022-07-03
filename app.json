@@ -1,0 +1,23 @@
+{
+  "expo": {
+    "name": "tatoo-manager",
+    "slug": "tatoo-manager",
+    "privacy": "public",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.muller.tattoomanager"
+    },
+    "android": {
+      "package": "com.muller.tattoomanager"
+    }
+  }
+}
