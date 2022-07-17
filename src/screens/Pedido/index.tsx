@@ -27,7 +27,7 @@ export const Pedido = ({ route, navigation }) => {
         <Button onPress={() => navigation.goBack()}>Voltar</Button>
         <Button onPress={() => openEditaPedido(pedido)}>Editar</Button>
       </View>
-      <Title>Número do pedido</Title>
+      <Title>Dados do pedido</Title>
       <ListInfos
         data={data}
         keyExtractor={item => item.id}

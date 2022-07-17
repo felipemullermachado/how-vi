@@ -1,11 +1,19 @@
 import styled from 'styled-components/native'
 
-export const Container = styled.View`
+export const Container = styled.ScrollView`
   background: #EFEFEF;
-  padding: 25px 20px;
+  flex: 1;
+  padding: 0 20px;
+  position: relative;
+`
+
+export const BigView = styled.View`
+  flex: 1;
+  padding: 25px 0;
 `
 
 export const View = styled.View`
+  padding-top: 25px;
   justify-content: space-between;
   flex-direction: row;
   align-items: baseline;
@@ -62,4 +70,5 @@ export const Delete = styled.Text`
   text-decoration: underline;
   text-decoration-color: #FF2929;
   margin-top: 25px;
+  padding-bottom: 25px;
 `

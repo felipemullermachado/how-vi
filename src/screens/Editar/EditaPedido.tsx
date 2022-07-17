@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Alert } from "react-native";
 import {
   Container,
   View,
@@ -8,7 +7,7 @@ import {
   Label,
   Input,
   Delete,
-} from "../assets/styles/Editar";
+} from "./styles";
 import uuid from "react-native-uuid";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 
@@ -39,7 +38,6 @@ export const EditaPedido = ({ route, navigation }) => {
   const [agendado, setAgendado] = React.useState("");
 
   const { idCliente, pedido } = route.params;
-  console.log(typeof pedido);
 
   const { getItem, setItem } = useAsyncStorage("@tattoo:pedidos");
 
@@ -67,7 +65,7 @@ export const EditaPedido = ({ route, navigation }) => {
         item.tamanho = tamanho;
         item.local = local;
         item.preco = preco;
-        item.status = status;
+        item.status = status.trim();
         item.agendado = agendado;
       }
       return item;
@@ -96,7 +94,7 @@ export const EditaPedido = ({ route, navigation }) => {
         tamanho,
         local,
         preco,
-        status,
+        status: status.trim(),
         agendado,
       };
 
@@ -141,7 +139,7 @@ export const EditaPedido = ({ route, navigation }) => {
           Concluído
         </Button>
       </View>
-      <Title>Dados do pedido</Title>
+      <Title>{idCliente ? "Cadastrar pedido" : "Editar Pedido"}</Title>
       <Label>Desenho</Label>
       <Input onChangeText={setDesenho} value={desenho} />
       <Label>Tamanho</Label>
@@ -154,7 +152,7 @@ export const EditaPedido = ({ route, navigation }) => {
       <Input onChangeText={setStatus} value={status} />
       <Label>Agendada para</Label>
       <Input onChangeText={setAgendado} value={agendado} />
-      <Delete onPress={handleDelete}>Deletar pedido</Delete>
+      {!idCliente && <Delete onPress={handleDelete}>Deletar pedido</Delete>}
     </Container>
   );
 };

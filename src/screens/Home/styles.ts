@@ -12,7 +12,7 @@ export const View = styled.View`
   gap: 0 25px;
 `
 
-export const BtnText = styled.Text`
+export const Btn = styled.TouchableOpacity`
   font-family: 'ReadexPro_400Regular';
   font-size: 14px;
   color: #3070EA;

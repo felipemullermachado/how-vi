@@ -1,14 +1,15 @@
 import styled from 'styled-components/native'
 
-export const Container = styled.View`
+export const Container = styled.ScrollView`
   background: #EFEFEF;
-  padding: 25px 20px;
+  padding: 0 20px;
 `
 
 export const View = styled.View`
   justify-content: space-between;
   flex-direction: row;
-  align-items: baseline;
+  align-items: flex-end;
+  padding-top: 25px;
 `
 
 export const Button = styled.Text`

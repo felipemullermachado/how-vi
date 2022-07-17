@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
-import { Linking } from "react-native";
 import {
   Container,
+  BigView,
   View,
   Button,
   Title,
   Label,
   Input,
   Delete,
-} from "../assets/styles/Editar";
+} from "./styles";
 import uuid from "react-native-uuid";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 
@@ -129,13 +129,15 @@ export const EditaCliente = ({ route, navigation }) => {
       <View>
         <Button
           onPress={() =>
-            navigation.navigate({
-              name: "Perfil",
-              params: {
-                cliente: cliente,
-              },
-              merge: true,
-            })
+            newCliente
+              ? navigation.goBack()
+              : navigation.navigate({
+                  name: "Perfil",
+                  params: {
+                    cliente: cliente,
+                  },
+                  merge: true,
+                })
           }
         >
           Voltar
@@ -144,7 +146,7 @@ export const EditaCliente = ({ route, navigation }) => {
           Concluído
         </Button>
       </View>
-      <Title>Dados do/a cliente</Title>
+      <Title>{newCliente ? "Cadastrar cliente" : "Editar cliente"}</Title>
       <Label>Nome completo</Label>
       <Input onChangeText={setNome} value={nome} />
       <Label>CPF</Label>
@@ -159,7 +161,7 @@ export const EditaCliente = ({ route, navigation }) => {
       <Input onChangeText={setEmail} value={email} />
       <Label>Instagram</Label>
       <Input onChangeText={setInstagram} value={instagram} />
-      <Delete onPress={handleDelete}>Deletar cliente</Delete>
+      {!newCliente && <Delete onPress={handleDelete}>Deletar cliente</Delete>}
     </Container>
   );
 };

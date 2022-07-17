@@ -12,13 +12,16 @@ import {
   Link,
   Subtitle,
 } from "./styles";
-import AsyncStorage, { useAsyncStorage } from "@react-native-async-storage/async-storage";
+import AsyncStorage, {
+  useAsyncStorage,
+} from "@react-native-async-storage/async-storage";
 import { useFocusEffect } from "@react-navigation/native";
+import { Linking } from "react-native";
 
 //Tela perfil que apresenta o cliente e seus respectivos pedidos
 
 export const Perfil = ({ route, navigation }) => {
-  const [pedidos, setPedidos] = useState([])
+  const [pedidos, setPedidos] = useState([]);
   const { getItem, setItem } = useAsyncStorage("@tattoo:clientes");
   const { cliente } = route.params;
   const idCliente = cliente.id;
@@ -46,11 +49,13 @@ export const Perfil = ({ route, navigation }) => {
         return item;
       }
     });
-    setPedidos(atualizaPedidos)
-  }
-  useFocusEffect(useCallback(() => {
-    handleFetchData()
-  }, []));
+    setPedidos(atualizaPedidos);
+  };
+  useFocusEffect(
+    useCallback(() => {
+      handleFetchData();
+    }, [])
+  );
 
   return (
     <Container>
@@ -61,7 +66,17 @@ export const Perfil = ({ route, navigation }) => {
       <Title>{route.params?.nome || cliente.nome}</Title>
       <Item>
         <Label>Celular</Label>
-        <Link>{route.params?.whats || cliente.whatsapp}</Link>
+        <Link
+          onPress={() =>
+            Linking.openURL(
+              `https://wa.me/55${(
+                route.params?.whats || cliente.phone
+              ).replace(/[^0-9]/g, "")}`
+            )
+          }
+        >
+          {route.params?.whats || cliente.phone}
+        </Link>
       </Item>
       <Item>
         <Label>E-mail</Label>
@@ -69,7 +84,7 @@ export const Perfil = ({ route, navigation }) => {
       </Item>
       <Item>
         <Label>Instagram</Label>
-        <Text>{route.params?.insta || cliente.instagram}</Text>
+        <Text>@{route.params?.insta || cliente.instagram}</Text>
       </Item>
       <View>
         <Subtitle>Pedidos</Subtitle>
